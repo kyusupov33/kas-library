@@ -1,0 +1,62 @@
+<custom-modal (close)="cancel()">
+
+  <form [formGroup]="myForm" novalidate>
+    <h1 mat-dialog-title>{{ 'DASHBOARD.CALENDAR_DIALOG.TITLE' | translate }}</h1>
+    <div mat-dialog-content>
+
+      <mat-form-field class="without-plan-selected">
+        <mat-select [placeholder]="('DASHBOARD.APPLICATION_PLACEHOLDER.WITHOUT_PLAN' | translate)"
+                    [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="selected"
+                    (selectionChange)="updateValidators()">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ variables.getVariable(type, 'variables', 'code').value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               data-id="duration"
+               type="number"
+               formControlName="duration"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.DURATION' | translate)">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               [matDatepicker]="picker"
+               formControlName="startDate"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.START_DATE' | translate)">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               [matDatepicker]="pickerEnd"
+               formControlName="endDate"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.END_DATE' | translate)">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+
+      <mat-error *ngIf="isCrossed" [@fadeAnimation]>
+        {{ 'DASHBOARD.CALENDAR_DIALOG.CROSSED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="mismatchYear" [@fadeAnimation]>
+        {{ 'DASHBOARD.CALENDAR_DIALOG.ERROR_MISMATCH' | translate }}
+      </mat-error>
+
+    </div>
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="add()" data-id="add-vacation" [disabled]="myForm.invalid || !selected">
+      {{ 'DASHBOARD.CALENDAR_DIALOG.ADD' | translate }}
+    </button>
+  </div>
+
+</custom-modal>

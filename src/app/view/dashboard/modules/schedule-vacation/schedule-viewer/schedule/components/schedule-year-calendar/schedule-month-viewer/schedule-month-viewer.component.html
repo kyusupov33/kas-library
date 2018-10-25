@@ -1,0 +1,24 @@
+<div class="calendar">
+  <header>
+    <h1>{{month.nameMonth}} {{month.currentYear}}</h1>
+  </header>
+  <div class="day-names">
+    <p *ngFor="let name of dayNames">{{ name }}</p>
+  </div>
+  <div class="days" data-id="days">
+    <div class="spacer pre" *ngFor="let spacer of spacers">{{spacer}}</div>
+    <ng-container *ngFor="let day of month.days">
+      <div
+        [attr.data-id]="'date-' + day.valueByString"
+        class="day color-process-stage-{{!day.editable ? month.vacation[day.dayNumber]?.period.processStage : ''}}"
+        [class.day-type-vacation]="day.marked"
+        matTooltipPosition="above"
+        [matTooltip]="day.marked && month.vacation[day.dayNumber]?.type ? ('DASHBOARD.APPLICATION_TYPE.' + month.vacation[day.dayNumber]?.type | translate) : null"
+        [matTooltipShowDelay]="300"
+        (click)="openCalendarDay(day, month)">
+        <span class="day-number">{{day.dayNumber}}</span>
+      </div>
+    </ng-container>
+    <div class="spacer post" *ngFor="let spacer of endSpacers">{{spacer}}</div>
+  </div>
+</div>

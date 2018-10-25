@@ -1,0 +1,35 @@
+<section class="table-builder">
+  <mat-paginator
+    class="table-paginator"
+    *ngIf="pagination"
+    [length]="paginationService.pageTotal"
+    [pageSize]="paginationService.pageCount"
+    [pageSizeOptions]="PAGINATION_CONFIG.pageSizeOptions"
+    (page)="switchTableDataOnPageEvent($event)"
+    showFirstLastButtons>
+  </mat-paginator>
+
+  <mat-table [dataSource]="dataSource"
+             matSort
+             [matSortDisabled]="!sortable"
+             (matSortChange)="sortData($event)"
+             class="table-data-source mat-elevation-z8">
+
+    <ng-container *ngFor="let key of headers" [matColumnDef]="key">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ translate(key) }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        {{element[key] | translate }}
+        <ng-template [ngIf]="key === 'ACTIONS'">
+          <table-builder-actions [actions]="actions"
+                                 (onClick)="submit($event, i)">
+          </table-builder-actions>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: headers;"></mat-row>
+  </mat-table>
+</section>

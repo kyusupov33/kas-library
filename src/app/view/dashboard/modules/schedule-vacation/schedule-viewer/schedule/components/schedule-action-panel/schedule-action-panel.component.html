@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="end center" class="actions">
+  <span
+    *ngFor="let action of actionList"
+    class="action-btn"
+    matTooltipPosition="above"
+    matTooltipClass="tooltip-red"
+    [matTooltip]="action.invalid ? (action.placeholderKey + yearTypeTitle | translate) : null">
+    <button
+      [attr.data-id]="'action-btn-' + action.type"
+      mat-raised-button
+      [disabled]="action.invalid"
+      (click)="invokeByAction(action)">
+      {{ action.titleKey | translate }}
+    </button>
+  </span>
+</div>

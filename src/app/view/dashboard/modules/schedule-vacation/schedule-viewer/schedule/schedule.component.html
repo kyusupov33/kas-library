@@ -1,0 +1,49 @@
+<div class="schedule" *ngIf="scheduleIsLoaded" [@fadeAnimation]>
+
+  <schedule-stage-panel
+    [application]="application"
+    [status]="application.processStage">
+  </schedule-stage-panel>
+
+  <schedule-approve-history-panel
+    *ngIf="application.processStage"
+    [id]="application.id">
+  </schedule-approve-history-panel>
+
+  <div class="schedule-card-persons"
+       fxLayout="row" fxLayoutGap="20px">
+
+    <schedule-initiator
+      class="schedule-card"
+      [application]="application"
+      [user]="user">
+    </schedule-initiator>
+
+    <schedule-approvers-managers
+      class="schedule-card"
+      [application]="application"
+      [editableType]="scheduleEditableType">
+    </schedule-approvers-managers>
+
+  </div>
+
+  <schedule-history-panel
+    *ngIf="scheduleIsPlan"
+    [userId]="userId"
+    [year]="application.year">
+  </schedule-history-panel>
+
+  <schedule-year-calendar
+    [application]="application"
+    (dayOnClick)="scheduleDayOnHandler($event)">
+  </schedule-year-calendar>
+
+  <schedule-action-panel
+    class="action-panel"
+    [actionList]="scheduleActionList"
+    [application]="application"
+    [totalDuration]="application.totalDuration"
+    (onAction)="scheduleDispatchAction($event)">
+  </schedule-action-panel>
+
+</div>

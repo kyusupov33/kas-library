@@ -1,0 +1,67 @@
+<custom-modal (close)="closeDialog()">
+  <div class="hr-route-modal-block">
+    <form [formGroup]="form"
+          (ngSubmit)="submit(tableAction.SAVE)"
+          class="hr-route-form"
+          fxLayout="column">
+      <mat-form-field>
+        <label fxLayout="row">
+          <input matInput
+                 type="search"
+                 formControlName="department"
+                 (keypress)="keyPress($event)"
+                 (input)="searchDepartment($event.target.value)"
+                 [matAutocomplete]="auto"
+                 placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.HR_ROUTE.DEPARTMENT' | translate }}">
+          <mat-autocomplete [displayWith]="displayOptionValue"
+                            (optionSelected)="setDepartment($event)"
+                            #auto="matAutocomplete">
+            <mat-option *ngIf="departmentDefinition" [value]="departmentDefinition">
+              {{departmentDefinition.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </label>
+        <mat-error *ngIf="form.invalid">{{ 'DASHBOARD.TABLE.WARNINGS.REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="main_curator_field">
+        <label class="person-dialog-form" fxLayout="row" (click)="searchMainCurator()">
+          <input matInput
+                 [value]="element.MAIN_CURATOR"
+                 formControlName="main_curator"
+                 type="text"
+                 placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.HR_ROUTE.MAIN_CURATOR' | translate }}">
+          <mat-icon class="action-btn person-form__button search-person-btn" matSuffix>
+            search
+          </mat-icon>
+        </label>
+        <mat-error *ngIf="form.invalid">{{ 'DASHBOARD.TABLE.WARNINGS.REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label class="person-dialog-form" fxLayout="row" (click)="searchBackUpCurator()">
+          <input matInput
+                 [value]="element.BACKUP_CURATOR"
+                 formControlName="backup_curator"
+                 type="text"
+                 placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.HR_ROUTE.BACKUP_CURATOR' | translate }}">
+          <mat-icon class="action-btn person-form__button search-person-btn" matSuffix>
+            search
+          </mat-icon>
+        </label>
+        <mat-icon (click)="deleteBackUpCurator()"
+                  class="delete-person-btn action-btn person-form__button delete-person-btn"
+                  matSuffix>
+          delete
+        </mat-icon>
+      </mat-form-field>
+      <button mat-raised-button type='submit'>
+        <span>
+          {{ 'DASHBOARD.TABLE.PLACEHOLDERS.SAVE_BTN' | translate }}
+        </span>
+        <mat-icon class="action-btn"
+                  matSuffix>
+          save
+        </mat-icon>
+      </button>
+    </form>
+  </div>
+</custom-modal>

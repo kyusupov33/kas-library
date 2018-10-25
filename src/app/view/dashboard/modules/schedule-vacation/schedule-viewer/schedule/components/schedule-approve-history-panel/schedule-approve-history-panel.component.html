@@ -1,0 +1,27 @@
+<div class="approve-history-panel" *ngIf="dataLoading">
+  <mat-expansion-panel displayMode="flat">
+    <mat-expansion-panel-header>
+      <ng-content></ng-content>
+      <mat-panel-title *ngIf="id">{{ 'DASHBOARD.APPROVAL_HISTORY_PANEL.TITLE' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <mat-table #routeTable [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let key of approveHistoryTableHeaders" [matColumnDef]="key">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <b>{{ ('DASHBOARD.APPROVAL_HISTORY.' + key) | translate }}</b>
+          </mat-header-cell>
+          <mat-cell class="mat-cell-table" *matCellDef="let element"> {{element[key]}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="approveHistoryTableHeaders"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: approveHistoryTableHeaders;"></mat-row>
+      </mat-table>
+
+      <ng-template [ngIf]="!dataSource || !dataSource.data.length">
+        <mat-card>{{ 'DASHBOARD.APPROVAL_HISTORY_PANEL.NO_DATA' | translate }}</mat-card>
+      </ng-template>
+    </ng-template>
+
+  </mat-expansion-panel>
+</div>

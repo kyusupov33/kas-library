@@ -1,0 +1,34 @@
+<mat-card class="year-calendar" *ngIf="isGenerated" [@fadeAnimation]>
+  <mat-card-content>
+
+    <h1 class="title" mat-dialog-title>
+
+      <ng-container *ngIf="application.type && application.processStage !== ProcessStage.DONE; else withoutType">
+        {{ ('DASHBOARD.APPLICATION_TYPE.' + application.type.code) | translate }}
+      </ng-container>
+
+
+      <ng-template #withoutType>
+        <ng-container *ngIf="application.year === Year; else default">
+          {{ 'DASHBOARD.APPLICATION_PLACEHOLDER.CALENDAR_VACATION' | translate }}
+        </ng-container>
+
+        <ng-template #default>
+          {{ 'DASHBOARD.APPLICATION_PLACEHOLDER.SCHEDULE_NEXT_YEAR' | translate }}
+        </ng-template>
+      </ng-template>
+
+    </h1>
+
+    <div class="year">
+      <div class="year__month" *ngFor="let month of vacationMonths" data-id="year__month">
+        <schedule-month-viewer
+          [month]="month"
+          [dayNames]="dayNames"
+          (dayOnClick)="dayOnClick.emit($event)">
+        </schedule-month-viewer>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

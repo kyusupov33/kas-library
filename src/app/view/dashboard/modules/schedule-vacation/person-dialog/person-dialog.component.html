@@ -1,0 +1,26 @@
+<custom-modal [showCloseButton]="false">
+
+  <form class="person-form" [class.person-form-editable]="editable" [formGroup]="personForm" novalidate>
+    <mat-form-field class="full-width">
+      <label fxLayout="row" (click)="searchPearson()">
+        <input
+          matInput
+          [attr.data-id]="'schedule-user-' + dataId"
+          [formControlName]="primaryKey"
+          [placeholder]="titleKey | translate"
+          autocomplete="off">
+        <mat-icon class="person-form__button search-person-btn" *ngIf="editable" matSuffix>
+          search
+        </mat-icon>
+      </label>
+      <mat-icon
+        *ngIf="removable && editable"
+        class="person-form__button delete-person-btn"
+        (click)="deletePearson()"
+        matSuffix>
+        delete
+      </mat-icon>
+    </mat-form-field>
+  </form>
+
+</custom-modal>

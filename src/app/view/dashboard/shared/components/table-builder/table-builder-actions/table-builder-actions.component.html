@@ -1,0 +1,11 @@
+<ng-template [ngIf]="actions">
+<button mat-raised-button
+        class="btn-open"
+        *ngFor="let action of actions"
+        (click)="submit(action)">
+  {{ TableBuilderActionMap[action]?.titleKey | translate }}
+  <mat-icon aria-label="Action button">
+    {{ TableBuilderActionMap[action]?.iconKey }}
+  </mat-icon>
+</button>
+</ng-template>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="dictionaryRoutesType">
+  <ng-container *ngIf="dataSource$ | async; let dataSource">
+
+    <ng-container *ngIf="DictionaryViewerConfig[dictionaryRoutesType.tableType] as dictionary">
+      <app-dictionary [type]="dictionaryRoutesType.tableType"
+                      [content]="dataSource"
+                      [pagination]="dictionary.pagination"
+                      [addition]="dictionary.addition"
+                      [filtration]="dictionary.filtration"
+                      [sortable]="dictionary.sortable"
+                      [tableActions]="dictionary.tableActions"
+                      [panelActions]="dictionary.panelActions">
+
+      </app-dictionary>
+    </ng-container>
+
+  </ng-container>
+</ng-container>
+

@@ -1,0 +1,9 @@
+<mat-nav-list class="dashboard-menu-list">
+  <div *ngFor="let dashMenu of dashBoardMenuConfig">
+    <h1 matSubheader *ngIf="dashMenu.visibleLength" class="menu-title">
+      {{ dashMenu.titleKey | translate}}
+    </h1>
+    <menu-block *ngFor="let link of dashMenu.links" [link]="link"></menu-block>
+  </div>
+  <ng-content></ng-content>
+</mat-nav-list>

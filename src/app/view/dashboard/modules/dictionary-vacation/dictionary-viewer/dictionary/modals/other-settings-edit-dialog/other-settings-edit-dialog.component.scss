@@ -1,0 +1,27 @@
+.person-dialog-form {
+  input {
+    cursor: pointer;
+  }
+}
+
+.action-btn {
+  cursor: pointer;
+}
+
+.mat-form-field-flex {
+  align-items: flex-end;
+}
+
+.delete-person-btn {
+  padding-bottom: 0.3em;
+}
+
+.dictionary-modal-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .dictionary-modal-form {
+    width: 100%;
+    justify-content: center;
+  }
+}

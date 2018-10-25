@@ -1,0 +1,15 @@
+<ng-container *ngIf="canViewContent" [@fadeAnimation]>
+  <partition-switch-year [year]="yearByRoute"></partition-switch-year>
+
+  <ng-container *ngIf="TableViewerConfig[partitionRoutesType.tableType] as partition">
+
+    <table-builder [type]="partitionRoutesType.tableType"
+                   [dataSource]="dataSource"
+                   [actions]="partition.tableActions"
+                   [headers]="headers"
+                   [pagination]="partition.pagination"
+                   [sortable]="partition.sortable"
+                   (onSubmit)="submit($event)">
+    </table-builder>
+  </ng-container>
+</ng-container>

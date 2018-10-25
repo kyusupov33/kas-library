@@ -1,0 +1,169 @@
+@mixin outline($color, $direction:all) {
+  @if $direction == "all" {
+    outline: solid 1px #{$color};
+  } @else if $direction == "top" {
+    border-top: solid 1px #{$color};
+  } @else if $direction == "bottom" {
+    border-bottom: solid 1px #{$color};
+  } @else if $direction == "right" {
+    border-right: solid 1px #{$color};
+  }
+}
+
+@mixin crop() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+$baseHeight: 35px;
+$basePeriodTitleHead: 50px;
+
+.partition-section {
+
+  &__header {
+    display: flex;
+  }
+
+  &__legend {
+    font-size: 14px;
+    margin: 5px 5px 5px 20px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &--year_type {
+    margin-bottom: 25px;
+  }
+
+  &__excel {
+    height: 34px;
+    line-height: 34px;
+    margin-top: -3px;
+    margin-left: 10px;
+    float: left;
+  }
+
+}
+
+.partition {
+  .mat-expansion-panel-body {
+    padding: 0;
+    min-height: $baseHeight;
+  }
+
+  .mat-expansion-panel-header-description {
+    margin: 0;
+  }
+
+  mat-expansion-panel-header,
+  .mat-expansion-panel-header.mat-expanded:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  mat-expansion-panel {
+    @include outline("rgba(0,0,0,.12)");
+  }
+
+  mat-expansion-panel-header {
+    height: $baseHeight !important;
+  }
+
+  &__table {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, .12);
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    tr {
+      @include outline("rgba(0,0,0,.12)", "bottom");
+      color: rgba(0, 0, 0, 0.74);
+      height: $baseHeight;
+
+      td.partition__table--diapason {
+        padding: 0;
+        margin: 0;
+        @include outline("rgba(0,0,0,.12)", "bottom");
+      }
+
+    }
+
+    .mat-checkbox-inner-container {
+      width: 15px;
+      height: 15px;
+    }
+
+    td {
+      padding-right: 5px;
+      position: relative;
+      @include outline("rgba(0,0,0,.12)", "right");
+      @include crop();
+    }
+
+    td.partition__table--period-viewer {
+      overflow: auto;
+      overflow-y: hidden;
+    }
+
+    .period-info-title {
+      height: $basePeriodTitleHead;
+    }
+
+    td:first-child {
+      padding-left: 24px;
+      border-left: none;
+    }
+
+    td:last-child {
+      border: none;
+    }
+
+    .partition__table--head {
+      border: none;
+
+      td {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      td.without-border {
+        border-right: none;
+      }
+
+    }
+
+    td.partition__table-partition {
+      padding: 0;
+      margin: 0;
+      border: none
+    }
+
+    td:nth-of-type(1) {
+      min-width: 100px;
+    }
+
+    td:nth-of-type(2) {
+      width: 70%;
+    }
+
+    td:nth-of-type(3) {
+      width: 50px;
+    }
+
+  }
+
+  .month_diapason {
+    .employee-line {
+      height: calc(#{$baseHeight} - 1px);
+      @include outline("rgba(0,0,0,.12)", "bottom");
+    }
+
+    .start-area {
+      margin-top: calc(#{$basePeriodTitleHead} - 1px);
+      @include outline("rgba(0,0,0,.12)", "top");
+    }
+
+  }
+
+}
+

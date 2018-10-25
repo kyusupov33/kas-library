@@ -1,0 +1,25 @@
+<custom-modal (close)="closeDialog()">
+  <div class="dictionary-modal-block">
+    <form [formGroup]="form"
+          (ngSubmit)="submit(tableAction.SAVE, form.value)"
+          class="dictionary-modal-form"
+          fxLayout="column">
+      <mat-form-field>
+        <input matInput
+               formControlName="value"
+               type="text"
+               placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.OTHER_SETTINGS.VALUE' | translate }}">
+        <mat-error *ngIf="form.invalid">{{ 'DASHBOARD.TABLE.WARNINGS.REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button type='submit'>
+        <span>
+          {{ 'DASHBOARD.TABLE.PLACEHOLDERS.SAVE_BTN' | translate }}
+        </span>
+        <mat-icon class="action-btn"
+                  matSuffix>
+          save
+        </mat-icon>
+      </button>
+    </form>
+  </div>
+</custom-modal>

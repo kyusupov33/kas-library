@@ -1,0 +1,19 @@
+.action-confirm-form {
+  .action-dialog-title {
+    text-align: center;
+  }
+
+  .mat-form-field {
+    width: 350px;
+
+    textarea {
+      height: 150px;
+      resize: none;
+
+    }
+  }
+
+  .dialog-actions-block {
+    width: 250px;
+  }
+}

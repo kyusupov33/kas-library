@@ -1,0 +1,11 @@
+.action-btn {
+  &:not(:last-child) {
+    margin-right: 1em;
+  }
+}
+
+.action-btn-invalid {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  cursor: default;
+}

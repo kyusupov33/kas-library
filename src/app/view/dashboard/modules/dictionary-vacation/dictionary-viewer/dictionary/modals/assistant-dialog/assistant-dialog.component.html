@@ -1,0 +1,50 @@
+<custom-modal (close)="closeDialog()">
+  <div class="hr-route-modal-block">
+    <form [formGroup]="form"
+          (ngSubmit)="submit(tableAction.SAVE)"
+          class="dictionary-modal-form"
+          fxLayout="column">
+      <mat-form-field>
+        <label fxLayout="row">
+          <input matInput
+                 type="search"
+                 formControlName="department"
+                 (keypress)="keyPress($event)"
+                 (input)="searchDepartment($event.target.value)"
+                 [matAutocomplete]="auto"
+                 placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.ASSISTANT.DEPARTMENT' | translate }}">
+          <mat-autocomplete [displayWith]="displayOptionValue"
+                            (optionSelected)="setDepartment($event)"
+                            #auto="matAutocomplete">
+            <mat-option *ngIf="departmentDefinition" [value]="departmentDefinition">
+              {{departmentDefinition.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </label>
+        <mat-error *ngIf="form.invalid">{{ 'DASHBOARD.TABLE.WARNINGS.REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="main_curator_field">
+        <label class="person-dialog-form" fxLayout="row" (click)="searchPerson()">
+          <input matInput
+                 [value]="element.FULL_NAME"
+                 formControlName="person"
+                 type="text"
+                 placeholder="{{ 'DASHBOARD.TABLE.PLACEHOLDERS.MODELS.ASSISTANT.PERSON' | translate }}">
+          <mat-icon class="action-btn person-form__button search-person-btn" matSuffix>
+            search
+          </mat-icon>
+        </label>
+        <mat-error *ngIf="form.invalid">{{ 'DASHBOARD.TABLE.WARNINGS.REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button type='submit'>
+        <span>
+          {{ 'DASHBOARD.TABLE.PLACEHOLDERS.SAVE_BTN' | translate }}
+        </span>
+        <mat-icon class="action-btn"
+                  matSuffix>
+          save
+        </mat-icon>
+      </button>
+    </form>
+  </div>
+</custom-modal>

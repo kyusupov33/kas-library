@@ -1,0 +1,32 @@
+<div class="application-process-stage" *ngIf="application?.processStage">
+  <mat-chip-list>
+    <mat-chip [class.active]="[ProcessStage.REWORK, ProcessStage.DRAFT].includes(application.processStage)">
+      {{ 'DASHBOARD.PROCESS_STAGE.ON_WRITE' | translate }}
+    </mat-chip>
+    <mat-chip [class.active]="ProcessStage.MANAGER_APPROVAL === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.MANAGER_APPROVAL' | translate }}
+    </mat-chip>
+    <mat-chip *ngIf="application.firstApprover.fullName" [class.active]="ProcessStage.FIRST_APPROVAL === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.FIRST_APPROVAL' | translate }}
+    </mat-chip>
+    <mat-chip *ngIf="application.secondApprover.fullName" [class.active]="ProcessStage.SECOND_APPROVAL === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.SECOND_APPROVAL' | translate }}
+    </mat-chip>
+    <mat-chip  *ngIf="application.type.value !== ('DASHBOARD.APPLICATION_TYPE.CORR' | translate) &&
+                      application.type.value !== ('DASHBOARD.APPLICATION_TYPE.SCHED' | translate)"
+               [class.active]="ProcessStage.HR_APPROVAL === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.HR_APPROVAL' | translate }}
+    </mat-chip>
+    <mat-chip *ngIf="ProcessStage.REJECTED === application.processStage"
+      [class.active]="ProcessStage.REJECTED === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.REJECTED' | translate }}
+    </mat-chip>
+    <mat-chip
+      [class.active]="
+      ProcessStage.DONE === application.processStage ||
+      ProcessStage.HR_REJECTED === application.processStage ||
+      ProcessStage.HR_DONE === application.processStage">
+      {{ 'DASHBOARD.PROCESS_STAGE.DONE' | translate }}
+    </mat-chip>
+  </mat-chip-list>
+</div>

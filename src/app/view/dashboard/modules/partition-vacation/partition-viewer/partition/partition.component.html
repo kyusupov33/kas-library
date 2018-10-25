@@ -1,0 +1,103 @@
+<mat-accordion class="partition" [@fadeAnimation]>
+  <mat-expansion-panel [expanded]="open" (opened)="load()">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>{{ 'DASHBOARD.DEPARTMENT.TITLE' | translate }}</b>:
+        {{ name || department.name }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+
+        <mat-panel-description *ngIf="department.employees" [@fadeAnimation]>
+          <table class="partition__table">
+
+            <!-- table head in root department -->
+            <ng-container *ngIf="showHead">
+              <tr class="partition__table--head">
+                <td rowspan="2">
+                  {{ 'DASHBOARD.DEPARTMENT.FIO' | translate }}
+                  ({{ 'DASHBOARD.DEPARTMENT.POSITION_NAME' | translate }})
+                </td>
+                <td class="without-border">{{ 'DASHBOARD.DEPARTMENT.VACATION' | translate }}</td>
+                <td></td>
+              </tr>
+              <tr class="partition__table--head">
+                <td class="partition__table--diapason">
+                  <mat-checkbox [(ngModel)]="indeterminate.value">
+                    {{ 'DASHBOARD.DEPARTMENT.FULL_CALENDAR' | translate }}
+                  </mat-checkbox>
+                </td>
+              </tr>
+            </ng-container>
+            <!-- [end] table head in root department -->
+
+            <!-- show employees with periods -->
+            <ng-container *ngFor="let employee of department.employees; let first = first;">
+              <tr *ngIf="showHead && first" class="period-info-title">
+                <td></td>
+                <td *ngIf="first"
+                    class="partition__table--period-viewer"
+                    [attr.rowspan]="department.employees.length + 1">
+                  <period-viewer
+                    [indeterminate]="indeterminate.value"
+                    [showTitles]="showHead"
+                    [employees]="department.employees"
+                    [year]="year">
+                  </period-viewer>
+                </td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <ng-container *ngIf="hasApproveEmployees[employee.employeeId] as approvable; else defaultEmployee">
+                    <a [attr.data-id]="'initiator-' + employee.fullNameWithPosition"
+                       [routerLink]="['/', scheduleRouteRoot, 'applicationId', approvable.applicationId]">
+                      {{employee.fullNameWithPosition}}
+                    </a>
+                  </ng-container>
+                  <ng-template #defaultEmployee> {{employee.fullNameWithPosition}}</ng-template>
+                </td>
+                <td *ngIf="!showHead && first"
+                    class="partition__table--period-viewer"
+                    [attr.rowspan]="department.employees.length">
+                  <period-viewer
+                    [indeterminate]="indeterminate.value"
+                    [employees]="department.employees"
+                    [year]="year">
+                  </period-viewer>
+                </td>
+                <td>
+                  <period-approve
+                    [approve]="hasApproveEmployees[employee.employeeId]">
+                  </period-approve>
+                </td>
+              </tr>
+            </ng-container>
+            <!-- [end] show employees with periods -->
+
+            <!-- sub departments -->
+            <tr *ngFor="let item of department.departments">
+              <td class="partition__table-partition" colspan="3">
+                <partition
+                  [year]="year"
+                  [userId]="userId"
+                  [name]="item.name"
+                  [indeterminate]="indeterminate"
+                  [withDepartments]="withDepartments"
+                  [departmentId]="item.id">
+                </partition>
+              </td>
+            </tr>
+            <!-- [end] sub departments -->
+
+          </table>
+        </mat-panel-description>
+
+
+      </ng-template>
+
+  </mat-expansion-panel>
+</mat-accordion>

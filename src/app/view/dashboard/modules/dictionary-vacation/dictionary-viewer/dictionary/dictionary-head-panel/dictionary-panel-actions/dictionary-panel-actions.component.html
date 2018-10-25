@@ -1,0 +1,10 @@
+  <button
+    mat-raised-button
+    color="primary"
+    *ngFor="let action of actions"
+    (click)="submit(action)">
+    {{ TableBuilderActionMap[action]?.titleKey | translate }}
+    <mat-icon aria-label="Panel action button">
+      {{ TableBuilderActionMap[action]?.iconKey }}
+    </mat-icon>
+  </button>

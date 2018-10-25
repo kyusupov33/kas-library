@@ -1,0 +1,61 @@
+<custom-modal (close)="cancel()">
+
+  <div *ngIf="isFilled">
+    <h1 mat-dialog-title>{{ 'DASHBOARD.CALENDAR_DIALOG.IS_OUT' | translate }}</h1>
+  </div>
+
+  <form *ngIf="!isFilled" [formGroup]="myForm" (keyup.enter)="add()" novalidate>
+    <h1 mat-dialog-title>{{ 'DASHBOARD.CALENDAR_DIALOG.TITLE' | translate }}</h1>
+    <div mat-dialog-content>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               data-id="duration"
+               type="number"
+               formControlName="duration"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.DURATION' | translate)">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               [matDatepicker]="picker"
+               formControlName="startDate"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.START_DATE' | translate)">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput
+               [matDatepicker]="pickerEnd"
+               formControlName="endDate"
+               [placeholder]="('DASHBOARD.CALENDAR_DIALOG.END_DATE' | translate)">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+
+      <mat-error *ngIf="isCrossed" [@fadeAnimation]>
+        {{ 'DASHBOARD.CALENDAR_DIALOG.CROSSED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="form['duration'].errors" [@fadeAnimation]>
+        {{ 'DASHBOARD.CALENDAR_DIALOG.ERROR_DURATION' | translate }}  {{ durationMax }}
+      </mat-error>
+      <mat-error *ngIf="mismatchYear" [@fadeAnimation]>
+        {{ 'DASHBOARD.CALENDAR_DIALOG.ERROR_MISMATCH' | translate }}
+      </mat-error>
+
+    </div>
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="add()" [disabled]="disableAdd" data-id="add-vacation">
+      {{ 'DASHBOARD.CALENDAR_DIALOG.ADD' | translate }}
+    </button>
+    <button mat-button (click)="remove()" [disabled]="disableRemove" data-id="remove-vacation">
+      {{ 'DASHBOARD.CALENDAR_DIALOG.REMOVE' | translate }}
+    </button>
+  </div>
+
+</custom-modal>

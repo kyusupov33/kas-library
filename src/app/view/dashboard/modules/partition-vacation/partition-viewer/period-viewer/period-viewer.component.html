@@ -1,0 +1,46 @@
+<div class="month_diapason">
+
+  <!-- table head in root department -->
+    <div *ngFor="let month of months; let i = index"
+         [style.width]="gridVerticalLineMonth[i].width"
+         [style.left]="gridVerticalLineMonth[i].offsetLeft"
+         [class.vertical-line-with-head]="showTitles"
+         class="vertical-line">
+      <ng-container *ngIf="showTitles">{{ month }}</ng-container>
+    </div>
+
+    <ng-container *ngIf="fullCalendar">
+      <div *ngFor="let day of gridVerticalDays; let i = index"
+           [style.width]="day.width"
+           [style.left]="day.offsetLeft"
+           [style.zIndex]="day.zIndex"
+           class="vertical-line" [class.vertical-line-days]="showTitles">
+        <span *ngIf="showTitles">{{ day.data }}</span>
+      </div>
+    </ng-container>
+  <!-- [end] table head in root department -->
+
+  <div [class.start-area]="showTitles">
+    <div *ngFor="let employee of employees; let i = index;"
+         class="employee-line">
+
+      <ng-container *ngFor="let drawLinePeriod of gridPeriodLine[i];">
+        <ng-container *ngIf="drawLinePeriod.data as data">
+          <div [style.left]="drawLinePeriod.offsetLeft"
+               [style.width]="drawLinePeriod.width"
+               [style.zIndex]="drawLinePeriod.zIndex"
+               [style.cursor]="drawLinePeriod.data.approvable ? 'pointer' : 'default'"
+               matTooltipPosition="above"
+               matTooltipClass="employee-line__tooltip"
+               [matTooltip]="drawLinePeriod.tooltip"
+               class="draw-period color-process-stage-{{ data.processStage }} {{ data.approvable ? 'period-approvable' : '' }}"
+               (click)="action(data)">
+            <mat-icon *ngIf="data.approvable">input</mat-icon>
+          </div>
+        </ng-container>
+      </ng-container>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+<ng-container *ngIf="taskRoutesType">
+  <ng-container *ngIf="dataSource$ | async; let dataSource">
+
+    <ng-container *ngIf="TaskViewerConfig[taskRoutesType.tableType] as task">
+      <task-list [type]="taskRoutesType.tableType"
+                 [completed]="taskRoutesType.completed"
+                 [data]="dataSource"
+                 [pagination]="task.pagination"
+                 [addition]="task.addition"
+                 [sortable]="task.sortable"
+                 [filtration]="task.filtration"
+                 [tableActions]="task.tableActions">
+      </task-list>
+    </ng-container>
+
+  </ng-container>
+</ng-container>

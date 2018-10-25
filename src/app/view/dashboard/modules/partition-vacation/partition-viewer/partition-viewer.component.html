@@ -1,0 +1,31 @@
+<section class="partition-section">
+
+  <div class="partition-section__header">
+    <partition-switch-year [year]="yearByRoute"></partition-switch-year>
+
+    <div class="partition-section__legend" (click)="openLegend()">
+      {{ 'DASHBOARD.DEPARTMENT.LEGEND' | translate }}
+    </div>
+
+    <button mat-raised-button
+            *ngIf="withDepartments"
+            class="partition-section__excel"
+            (click)="printDepartmentExcel(yearByRoute, departmentId)">
+      {{ 'DASHBOARD.DEPARTMENT.PRINT_EXCEL' | translate }}
+    </button>
+  </div>
+
+  <ng-container *ngIf="canViewContent">
+    <section class="partition-section--department" *ngIf="departmentId">
+      <partition [year]="yearByRoute"
+                 [userId]="userId"
+                 [open]="true"
+                 [showHead]="true"
+                 [withDepartments]="withDepartments"
+                 [indeterminate]="indeterminate"
+                 [departmentId]="departmentId">
+      </partition>
+    </section>
+  </ng-container>
+
+</section>

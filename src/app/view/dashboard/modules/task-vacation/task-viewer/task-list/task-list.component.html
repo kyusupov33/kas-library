@@ -1,0 +1,23 @@
+<section fxLayout="column" [@fadeAnimation]>
+
+  <div *ngIf="!completed" class="task-head-panel" fxLayout="row">
+    <div class="task-switched" fxLayoutAlign="space-between center">
+      <p>{{ 'DASHBOARD.TASKS.PANEL.MY_TASKS' | translate }}</p>
+      <mat-slide-toggle class="task-switched" (change)="onSwitchChange($event)" color="primary"></mat-slide-toggle>
+      <p>{{ 'DASHBOARD.TASKS.PANEL.ALL_TASKS' | translate }}</p>
+    </div>
+    <div class="task-filters" *ngIf="filtration" fxFlex="80">
+      <!-- TODO: Add filters here -->
+    </div>
+  </div>
+
+  <table-builder [type]="type"
+                 [dataSource]="data"
+                 [actions]="tableActions"
+                 [headers]="headers"
+                 [pagination]="pagination"
+                 [sortable]="sortable"
+                 (onSubmit)="submit($event)"
+                 (setTableDataByPage)="setTasksDataByPage()">
+  </table-builder>
+</section>

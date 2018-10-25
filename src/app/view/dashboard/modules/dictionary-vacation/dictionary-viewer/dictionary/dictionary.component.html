@@ -1,0 +1,20 @@
+<section [@fadeAnimation]>
+  <dictionary-head-panel *ngIf="addition || filtration">
+    <dictionary-panel-actions *ngIf="addition"
+                              [type]="type"
+                              [actions]="panelActions"
+                              (onSubmit)="submit($event)">
+    </dictionary-panel-actions>
+
+    <div *ngIf="filtration">h1</div>
+  </dictionary-head-panel>
+  <table-builder [type]="type"
+                 [dataSource]="content"
+                 [actions]="tableActions"
+                 [headers]="headers"
+                 [pagination]="pagination"
+                 [sortable]="sortable"
+                 (onSubmit)="submit($event)"
+                 (setTableDataByPage)="setDictionaryDataByPage()">
+  </table-builder>
+</section>

@@ -1,0 +1,9 @@
+<a mat-list-item
+   [attr.data-id]="link.dataId"
+   class="mat-list-element"
+   *ngxPermissionsOnly="link.roleLink"
+   [routerLink]="link.routerLink"
+   routerLinkActive="is-active">
+  <mat-icon class="mat-list-icon" aria-label="Side nav toggle icon">{{ link?.icon }}</mat-icon>
+  {{ link.titleKey | translate:link.params }}
+</a>

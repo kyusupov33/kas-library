@@ -1,0 +1,30 @@
+.table-builder {
+
+  .table-paginator {
+    padding-left: 0;
+  }
+
+  .table-data-source {
+
+    mat-header-row .mat-header-cell {
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      color: black;
+    }
+
+    mat-row .mat-cell, mat-row .mat-footer-cell {
+      font-size: 13px;
+      text-align: center;
+    }
+
+    mat-footer-row, mat-header-row, mat-row {
+      padding: 0.5em 0;
+    }
+
+    mat-cell, mat-footer-cell, mat-header-cell {
+      justify-content: center;
+    }
+  }
+
+}

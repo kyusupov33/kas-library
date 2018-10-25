@@ -1,0 +1,55 @@
+<mat-progress-bar *ngIf="!scheduleIsLoaded && !notAuthorizedForTask && !taskNotFound"
+                  mode="indeterminate"></mat-progress-bar>
+
+<div class="schedule schedule-hr-task" *ngIf="scheduleIsLoaded" [@fadeAnimation]>
+
+  <h2>{{ 'DASHBOARD.SCHEDULE_HR_TASKS.TASK_VACATION' | translate }}</h2>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+
+    <schedule-initiator
+      class="schedule-card"
+      [application]="application"
+      [showDuration]="false"
+      [user]="user">
+    </schedule-initiator>
+
+    <schedule-periods
+      class="schedule-card"
+      [application]="application">
+    </schedule-periods>
+
+    <schedule-approvers-managers
+      class="schedule-card"
+      [application]="application"
+      [editableType]="scheduleEditableType">
+    </schedule-approvers-managers>
+
+  </div>
+
+  <schedule-action-panel
+    class="action-panel"
+    [actionList]="scheduleActionList"
+    [application]="application"
+    (onAction)="scheduleDispatchAction($event)">
+  </schedule-action-panel>
+
+</div>
+
+<div *ngIf="notAuthorizedForTask" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="task-not-authorized-card">
+    <mat-card-content fxLayout="row" fxLayoutAlign="start end">
+      <mat-icon class="mat-18" color="primary" fxFlex="4">warning</mat-icon>
+      <span>{{ 'DASHBOARD.SCHEDULE_HR_TASKS.TASK_PERMISSIONS_DENIED' | translate }}</span>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="taskNotFound" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="task-not-found-card">
+    <mat-card-content fxLayout="row" fxLayoutAlign="start end">
+      <mat-icon class="mat-18" color="primary" fxFlex="4">error</mat-icon>
+      <span>{{ 'DASHBOARD.SCHEDULE_HR_TASKS.TASK_NOT_FOUND' | translate }}</span>
+    </mat-card-content>
+  </mat-card>
+</div>

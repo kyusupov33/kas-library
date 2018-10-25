@@ -1,0 +1,100 @@
+a.disabled {
+  color: #8c8a8a;
+  cursor: not-allowed;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.toolbar-info {
+  width: 100%;
+}
+
+.sidenav {
+  width: 250px;
+  z-index: 1 !important;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+
+.mat-sidenav {
+  box-shadow: 0 -2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+.dashboard-logo {
+  overflow: hidden;
+  background: #fff;
+
+  .main-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+
+.dashboard-header {
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,.25);
+}
+
+.menu-title {
+  background: whitesmoke;
+  color: black;
+}
+
+.img__logo {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.mat-icon {
+  font-size: 20px;
+  opacity: 0.8;
+  line-height: 23px;
+}
+
+.vacations-text-icon {
+  margin-right: 4px;
+}
+
+
+dashboard-menu {
+  padding: 0;
+  margin: 0;
+}
+
+.layout {
+  height:100%;
+  overflow: hidden;
+
+  .layout__content {
+    margin-top: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 110px);
+  }
+
+}
+
+.layout__main-content {
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-list-item .mat-list-icon {
+  padding: 0;
+  margin-right: 3px;
+}
+
+.mat-nav-list {
+  padding: 0;
+}

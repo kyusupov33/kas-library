@@ -1,0 +1,82 @@
+@mixin crop() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+$dayWidth: 25px;
+$headMonthPaddingTop: 5px;
+
+:host {
+  padding: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  width: 100%;
+  position: absolute;
+}
+
+.month_diapason {
+
+  .employee-line {
+    width: 100%;
+    position: relative;
+
+    &__tooltip {
+      text-align: center;
+    }
+
+  }
+
+  .employee-line:last-child {
+    border: none;
+  }
+
+  .vertical-line {
+    pointer-events: none;
+  }
+
+  .vertical-line,
+  .draw-period {
+    left: 0;
+    top: 0;
+    position: absolute;
+    text-align: center;
+    overflow: hidden;
+    height: 100%;
+    z-index: 0;
+    background-color: transparent;
+    border-right: solid 1px rgba(0,0,0,.12);
+    @include crop();
+  }
+
+  .vertical-line-days {
+    font-size: 12px;
+    top: $dayWidth;
+    height: calc(100% - #{$headMonthPaddingTop} - #{$dayWidth});
+  }
+
+  .vertical-line-with-head {
+    height: calc(100% - #{$headMonthPaddingTop});
+    padding-top: $headMonthPaddingTop;
+  }
+
+  .draw-period {
+    z-index: 0;
+    height: calc(100% - 4px);
+    top: 2px;
+
+    .mat-icon {
+      font-size: 20px;
+      line-height: 30px;
+      opacity: 0.5;
+    }
+
+    &:hover > .mat-icon {
+      opacity: 1;
+    }
+
+  }
+
+}

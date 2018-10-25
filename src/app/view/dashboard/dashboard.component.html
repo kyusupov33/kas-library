@@ -1,0 +1,62 @@
+<!-- system components -->
+<simple-notifications [options]="options"></simple-notifications>
+<spinner></spinner>
+
+<section class="app-box-parent" data-id="dashboard">
+  <mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+
+      <mat-toolbar class="dashboard-logo">
+        <a class="main-logo" [routerLink]="['/', DashboardRoute.PAGE_HOME]">
+          <img class="responsive-img img__logo" src="./assets/img/logo.jpg"/>
+        </a>
+      </mat-toolbar>
+
+      <dashboard-menu>
+          <ng-container *ngIf="!env.production">
+            <mat-divider></mat-divider>
+            <a mat-list-item data-id="logout-btn" (click)="logout()">
+              <mat-icon class="mat-list-icon" aria-label="Side nav toggle icon">exit_to_app</mat-icon>
+              {{ 'DASHBOARD.MENU.LOGOUT' | translate }}
+            </a>
+          </ng-container>
+      </dashboard-menu>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="layout">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="dashboard-header">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button
+              type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>{{ 'DASHBOARD.NAV_BAR.MAIN' | translate }}</span>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <span>{{ userData.fullName }}</span>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <section class="layout__content">
+        <router-outlet>
+          <!--Content-->
+        </router-outlet>
+      </section>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</section>

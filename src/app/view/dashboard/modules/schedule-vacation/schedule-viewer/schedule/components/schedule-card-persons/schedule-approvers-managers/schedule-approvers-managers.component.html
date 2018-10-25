@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-content>
+
+    <person-dialog
+      titleKey="DASHBOARD.APPLICATION_PLACEHOLDER.MANAGER"
+      [dataId]="'manager'"
+      [required]="true"
+      [removable]="false"
+      [exclude]="excludeList"
+      [editable]="editableType.isManagerEditable"
+      [person]="application.manager"
+      (upload)="updateApplicationApprovers('manager', $event)">
+    </person-dialog>
+
+    <person-dialog
+      titleKey="DASHBOARD.APPLICATION_PLACEHOLDER.FIRST_APPROVER"
+      [required]="false"
+      [removable]="true"
+      [exclude]="excludeList"
+      [editable]="editableType.isFirstApprovalEditable"
+      [person]="application.firstApprover"
+      (upload)="updateApplicationApprovers('firstApprover', $event)">
+    </person-dialog>
+
+    <person-dialog
+      titleKey="DASHBOARD.APPLICATION_PLACEHOLDER.SECOND_APPROVER"
+      [required]="false"
+      [removable]="true"
+      [exclude]="excludeList"
+      [editable]="editableType.isSecondApprovalEditable"
+      [person]="application.secondApprover"
+      (upload)="updateApplicationApprovers('secondApprover', $event)">
+    </person-dialog>
+
+
+  </mat-card-content>
+</mat-card>

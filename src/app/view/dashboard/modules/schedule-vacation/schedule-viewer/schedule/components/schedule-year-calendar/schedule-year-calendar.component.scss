@@ -1,0 +1,21 @@
+.year-calendar {
+  margin: 20px 0;
+
+  .title {
+    text-align: center;
+    margin-top: 5px;
+  }
+}
+
+.year {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1050px;
+  margin: auto;
+  justify-content: space-around;
+
+  &__month {
+    margin: 5px;
+  }
+
+}

@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="initiatorForm" novalidate>
+
+      <mat-form-field class="schedule-card__item">
+        <label>
+          <input
+            data-id="schedule-initiator-full-name"
+            matInput
+            [formControlName]="InitiatorKeys.fullName"
+            [placeholder]="'DASHBOARD.APPLICATION_PLACEHOLDER.FULL_NAME' | translate">
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="schedule-card__item">
+        <label>
+          <input
+            data-id="schedule-initiator-position-name"
+            matInput
+            [formControlName]="InitiatorKeys.positionName"
+            [placeholder]="'DASHBOARD.APPLICATION_PLACEHOLDER.POSITION_NAME' | translate">
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="schedule-card__item">
+        <label>
+          <input
+            data-id="schedule-initiator-department"
+            matInput
+            [formControlName]="InitiatorKeys.departmentName"
+            [placeholder]="'DASHBOARD.APPLICATION_PLACEHOLDER.DEPARTMENT_NAME' | translate">
+        </label>
+      </mat-form-field>
+
+    </form>
+
+    <form *ngIf="showDuration" novalidate>
+
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-around">
+        <mat-form-field class="schedule-card__item" *ngIf="showPlanningDays">
+          <label>
+            <input
+              matInput
+              [disabled]="true"
+              name="planningDay"
+              [(ngModel)]="application.availableDays"
+              [placeholder]="'DASHBOARD.APPLICATION_PLACEHOLDER.PLANNING' | translate">
+          </label>
+        </mat-form-field>
+
+        <mat-form-field class="schedule-card__item">
+          <label>
+            <input
+              matInput
+              [disabled]="true"
+              name="planningSumDays"
+              [(ngModel)]="application.totalDuration"
+              [placeholder]="'DASHBOARD.APPLICATION_PLACEHOLDER.SUM_VACATION' | translate">
+          </label>
+        </mat-form-field>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,18 @@
+<div class="schedule-history-panel" *ngIf="historyList.length" [@fadeAnimation]>
+
+  <mat-expansion-panel class="schedule-history-panel__collapsible">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'DASHBOARD.SCHEDULE_HISTORY_PANEL.TITLE' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <schedule-approve-history-panel *ngFor="let history of historyList" [logs]="history.logs">
+        {{ history.type?.value }}
+        <span class="schedule-history-panel__element">
+        {{ history.periods[0]?.startDate }} - {{ history.periods[0]?.endDate }}
+      </span>
+      </schedule-approve-history-panel>
+    </ng-template>
+  </mat-expansion-panel>
+
+</div>

@@ -1,0 +1,5 @@
+<div class="partition-switch-year" fxLayout="row">
+  <span class="partition-switch-year--year_previous">{{ 'DASHBOARD.DEPARTMENT.CURRENT' | translate }} </span>
+  <mat-slide-toggle [ngModel]="selected[year]" (ngModelChange)="changeYearByTypeType($event)"></mat-slide-toggle>
+  <span class="partition-switch-year--year_next">{{ 'DASHBOARD.DEPARTMENT.NEXT' | translate:nextYear }}</span>
+</div>

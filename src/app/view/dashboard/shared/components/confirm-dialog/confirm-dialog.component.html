@@ -1,0 +1,50 @@
+<custom-modal [showCloseButton]="false">
+
+  <form class="action-confirm-form"
+        fxLayout="column"
+        fxLayoutAlign="center center">
+    <h1 mat-dialog-title class="action-dialog-title">
+      {{ data.title }}
+    </h1>
+
+    <h3 class="action-dialog-title" *ngIf="data.error">
+      {{ data.error }}
+    </h3>
+
+    <div mat-dialog-content *ngIf="data.enableComment">
+      <mat-form-field appearance="outline">
+        <textarea matInput
+           name='test'
+           [(ngModel)]="comment"
+           rows="4"
+           [placeholder]="'DASHBOARD.ACTION_CONFIRM.INFO' | translate"
+         ></textarea>
+        </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions
+         class="dialog-actions-block"
+         fxLayout="row"
+         fxLayoutAlign="space-around center">
+
+      <button
+        mat-button type="button"
+        data-id="ok"
+        [disabled]="data.error"
+        (click)="submit()">
+        {{ 'DASHBOARD.ACTION_CONFIRM.OK' | translate }}
+      </button>
+
+      <button mat-button
+              type="button"
+              (click)="closeDialog()">
+        {{ 'DASHBOARD.ACTION_CONFIRM.CANCEL' | translate }}
+      </button>
+
+    </div>
+
+  </form>
+
+</custom-modal>
+

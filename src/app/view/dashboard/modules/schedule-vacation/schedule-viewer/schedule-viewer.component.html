@@ -1,0 +1,29 @@
+<ng-container *ngIf="canViewContent">
+  <ng-container *ngIf="(application$ | async) as application">
+
+    <schedule-by-id
+      *ngIf="applicationId && !taskId"
+      [applicationId]="applicationId"
+      [application]="application">
+      <!-- Schedule by application ID -->
+    </schedule-by-id>
+
+    <schedule-by-plan
+      *ngIf="year"
+      [year]="year"
+      [application]="application">
+      <!-- Schedule for the current and next year -->
+    </schedule-by-plan>
+
+    <schedule-by-task
+      *ngIf="taskId"
+      [taskId]="taskId"
+      [completed]="completedTask"
+      [applicationId]="applicationId"
+      [application]="application">
+      <!-- Schedule for the current and next year -->
+    </schedule-by-task>
+
+  </ng-container>
+</ng-container>
+

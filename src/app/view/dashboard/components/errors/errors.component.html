@@ -1,0 +1,6 @@
+<mat-card class="error">
+  <h1> {{ 'DASHBOARD.ERROR_CODE.ERROR_TITLE' | translate }} {{ code }} </h1>
+  <p> {{ 'DASHBOARD.ERRORS.' + code | translate }} </p>
+  <pre *ngIf="error">{{ error | json}} </pre>
+</mat-card>
+
